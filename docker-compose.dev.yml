@@ -1,0 +1,26 @@
+version: '3'
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+services:
+  web:
+    build:
+      context: ./VPS_init
+      dockerfile: Dockerfile.front
+    image: 'angular_dev:${APP_VERSION}'
+    deploy:
+      replicas: 1
+    ports:
+      - 4200:4200
+    volumes:
+      - 'extensions:/root/.vscode-server'
+      - 'src:/app'
+
+volumes:
+  extensions:
+  extensions_nest:
+  src:

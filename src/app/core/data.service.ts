@@ -18,19 +18,19 @@ export class DataService {
 
     let pokemons;
 
-    this.fetchUrl(`${API_URL}/pokemon`).then((data) => { pokemons = data });
+    this.fetchUrl(`${API_URL}/pokemon`).then((data) => {
+      pokemons = data;
+      pokemons.map((item) => {
+        let details;
+        this.fetchUrl(item.url).then((det) => (details = det));
 
-    pokemons.map((item) => {
-      let details;
-      this.fetchUrl(item.url).then((data) => (details = data));
+        item.id = details.id;
+        item.image = `${IMG_URL}/${item.id}.png`;
+        item.abilities = details.abilities.map((i) => i.ability);
 
-      item.id = details.id;
-      item.image = `${IMG_URL}/${item.id}.png`;
-      item.abilities = details.abilities.map((i) => i.ability);
-
-      pokemonsList.push(item);
+        pokemonsList.push(item);
+      });
     });
-    console.log(pokemonsList);
 
     return pokemonsList;
   }

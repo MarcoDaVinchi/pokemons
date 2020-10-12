@@ -16,48 +16,55 @@ export class DataService {
   public getPokemons(): IPokemon[] {
     let pokemonsList: IPokemon[];
 
-    let pokemons = fetch(`${API_URL}/pokemon`)
-      .then(
-        (response) => {
-          if (response.status !== 200) {
-            return null;
-          } else {
-            return response.json();
-          }
-        },
-        (failResponse) => {
-          return null;
-        }
-      )
-      .then((data) => {
-        pokemonsList = data.map((item) => {
-          let pokemon: IPokemon;
-              pokemon.name = i.name;
-              pokemon.id = i.id;
-              pokemon.abilities = i.abilities.map((item) => item.ability);
-              pokemon.image = `${IMG_URL}/${pokemon.id}.png`;
-        };) });
-    
-    // let results = await Promise.all(pokemons);
+    let pokemons;
 
-    // let response: Response = await fetch(`${API_URL}/pokemons`);
-    // if (response.ok) {
-    //   let json = await response.json();
-    //   for (const i of json) {
-    //     let pokemon: IPokemon;
-    //     pokemon.name = i.name;
-    //     pokemon.id = i.id;
-    //     pokemon.abilities = i.abilities.map((item) => item.ability);
-    //     pokemon.image = `${IMG_URL}/${pokemon.id}.png`;
+    this.fetchUrl(`${API_URL}/pokemon`).then((data) => { pokemons = data });
 
-    //     pokemonsList.push(pokemon);
-    //   }
-    // } else {
-    //   console.error('HTTP request error: ' + response.status);
-    // }
+    pokemons.map((item) => {
+      let details;
+      this.fetchUrl(item.url).then((data) => (details = data));
+
+      item.id = details.id;
+      item.image = `${IMG_URL}/${item.id}.png`;
+      item.abilities = details.abilities.map((i) => i.ability);
+
+      pokemonsList.push(item);
+    });
+    console.log(pokemonsList);
+
+    return pokemonsList;
   }
 
   public getPokemonById(pokeId: number) {}
 
-  public getPokemonsCount() {}
+  public getPokemonByName(pokeName) {
+    let res;
+    this.fetchUrl(`${API_URL}/pokemon/${pokeName}`).then(
+      (data) => (res = data)
+    );
+    return res;
+  }
+
+  public getPokemonsCount() {
+    let count: number;
+    this.fetchUrl(`${API_URL}/pokemon`).then((data) => {
+      count = data.count;
+    });
+    return count;
+  }
+
+  private fetchUrl(url) {
+    return fetch(url).then(
+      (response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return null;
+        }
+      },
+      (failResponse) => {
+        return null;
+      }
+    );
+  }
 }

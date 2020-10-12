@@ -3,6 +3,7 @@ export interface IPokemon {
   id: number;
   abilities: IAbility[];
   image: string;
+  url: string;
 }
 
 export interface IAbility {

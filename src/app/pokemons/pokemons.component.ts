@@ -15,5 +15,23 @@ export class PokemonsComponent implements OnInit {
 
   ngOnInit(): void {
     this.pokemons = this.dataService.getPokemons();
+    // this.pokemons = [
+    //   {
+    //     name: 'bulbasaur',
+    //     id: 1,
+    //     abilities: [
+    //       {
+    //         name: 'overgrow',
+    //         url: 'https://pokeapi.co/api/v2/ability/65/',
+    //       },
+    //       {
+    //         name: 'chlorophyll',
+    //         url: 'https://pokeapi.co/api/v2/ability/34/',
+    //       },
+    //     ],
+    //     image: 'https://pokeres.bastionbot.org/images/pokemon/1.png',
+    //     url: 'https://pokeapi.co/api/v2/pokemon/1/',
+    //   },
+    // ];
   }
 }

@@ -1,6 +1,7 @@
 <section class="pokemons-list">
+  <app-query-textbox (changed)="filter($event)"></app-query-textbox>
   <ul class="dashboard">
-    <li *ngFor="let pokemon of pokemons" class="dashboard-card">
+    <li *ngFor="let pokemon of filteredPokemons" class="dashboard-card">
       <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" />
       <div class="main-info">
         <h1>{{ pokemon.name }}</h1>

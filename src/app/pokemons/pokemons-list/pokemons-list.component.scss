@@ -15,16 +15,32 @@
   list-style: none;
   background-color: #cccec9;
   border: 2px solid #cccec9;
-  border-radius: 2%;
+  border-radius: 4%;
   padding-bottom: 0;
+  font-size: 0.9vw;
 }
 
 .main-info {
+  display:flex;
+  flex-direction: column;
   background-color: #ffffff;
-  height: 20%;
-  margin: 0;
-  padding: 0;
+  // height: 20%;
+  margin: 0 auto;
+  padding: 0.8vw 3vw 0vw 3vw;
+  border: 2px solid  #cccec9;
+  border-radius: 0 0 4% 4%;
+  ul {
+    padding-top:0.3vw;
+    padding-left: 0.9vw;
+    line-height: 0.3;
+    li{
+      font-weight: bold;
+    }
+  }
 }
 
 .pokemons-list {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }

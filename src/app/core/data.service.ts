@@ -15,31 +15,9 @@ export class DataService {
 
   public async getPokemons(): Promise<IPokemon[]> {
     let pokemonsList: IPokemon[] = [];
-
-    // let pokemons: {} = {};
-
-    // this.fetchUrl(`${API_URL}/pokemon`).then((data) => {
-    //   // pokemons = data;
-    //   for (let item of data.results) {
-    //     let details;
-    //     details = this.fetchUrl(item.url).then((det) => {
-    //       return { id: det.id, abilities: det.abilities };
-    //     });
-    //     item.id = details.id;
-    //     item.image = `${IMG_URL}/${item.id}.png`;
-    //     item.abilities = details.abilities.map((i) => i.ability);
-
-    //     pokemonsList.push(item);
-    //   }
-    // });
-
     let data = await this.fetchUrl(`${API_URL}/pokemon`);
-    // pokemons = data;
     for (let item of data.results) {
       let details = await this.fetchUrl(item.url);
-      // details = this.fetchUrl(item.url).then((det) => {
-      //   return { id: det.id, abilities: det.abilities };
-      // });
       item.id = details.id;
       item.image = `${IMG_URL}/${item.id}.png`;
       item.abilities = details.abilities.map((i) => i.ability);
@@ -48,7 +26,6 @@ export class DataService {
     }
 
     return pokemonsList;
-    // return pokemonsList;
   }
 
   public getPokemonById(pokeId: number) {}

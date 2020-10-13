@@ -14,7 +14,7 @@ export class PokemonsComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.pokemons = this.dataService.getPokemons();
+    this.dataService.getPokemons().then((data) => (this.pokemons = data));
     // this.pokemons = [
     //   {
     //     name: 'bulbasaur',

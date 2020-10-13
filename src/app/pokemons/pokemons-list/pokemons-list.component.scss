@@ -1,0 +1,30 @@
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: space-around;
+  img {
+    width: 27vw;
+  }
+}
+
+.dashboard-card {
+  margin: 1vw;
+  list-style: none;
+  background-color: #cccec9;
+  border: 2px solid #cccec9;
+  border-radius: 2%;
+  padding-bottom: 0;
+}
+
+.main-info {
+  background-color: #ffffff;
+  height: 20%;
+  margin: 0;
+  padding: 0;
+}
+
+.pokemons-list {
+}

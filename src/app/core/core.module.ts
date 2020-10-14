@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DataService } from './data.service';
+import { DataService } from '../services/data.service';
 
 @NgModule({
   declarations: [],

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IPokemon } from 'src/app/shared/interfaces';
+import { IPokemon } from '../../../types/interfaces';
 
 @Component({
   selector: 'app-pokemons-list',

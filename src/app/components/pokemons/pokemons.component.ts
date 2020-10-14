@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataService } from '../core/data.service';
-import { IPokemon } from '../shared/interfaces';
+import { DataService } from '../../services/data.service';
+import { IPokemon } from '../../types/interfaces';
 
 @Component({
   selector: 'app-pokemons',

@@ -20,11 +20,22 @@ export class PokemonsListComponent implements OnInit {
   }
 
   filteredPokemons: IPokemon[] = [];
-  currentSelectedPokemon: IPokemon;
+  currentSelectedPokemon: IPokemon = {
+    name: '',
+    id: 0,
+    image: '',
+    abilities: [
+      {
+        name: '',
+        effect: '',
+        id: 0,
+        url: '',
+      },
+    ],
+    url: '',
+  };
 
-  constructor(private modalService: ModalService) {
-    this.currentSelectedPokemon = this.pokemons[0];
-  }
+  constructor(private modalService: ModalService) {}
 
   ngOnInit(): void {}
 
@@ -39,8 +50,8 @@ export class PokemonsListComponent implements OnInit {
   }
 
   openModal(pokemon: IPokemon) {
-    this.modalService.open(`modal-${pokemon.name}card`);
     this.currentSelectedPokemon = pokemon;
+    this.modalService.open(`modal-${pokemon.name}card`);
   }
 
   closeModal(id: string) {

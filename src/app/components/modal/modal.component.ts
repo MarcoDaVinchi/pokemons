@@ -37,6 +37,22 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.element.remove();
   }
 
+  add(): void{
+    if (!this.id) {
+      console.error('Provide an ID to your modal!');
+      return;
+    }
+    document.body.appendChild(this.element);
+
+    this.element.addEventListener('click', el => {
+      if (el.target.className === 'app-modal') {
+        this.close();
+      }
+    })
+
+    this.modalService.add(this);
+  }
+
   open(): void{
     this.element.style.display = 'flex';
     document.body.classList.add('app-modal-open');

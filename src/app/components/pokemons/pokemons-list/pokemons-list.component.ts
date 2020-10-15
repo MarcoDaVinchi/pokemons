@@ -20,20 +20,8 @@ export class PokemonsListComponent implements OnInit {
   }
 
   filteredPokemons: IPokemon[] = [];
-  currentSelectedPokemon: IPokemon = {
-    name: '',
-    id: 0,
-    image: '',
-    abilities: [
-      {
-        name: '',
-        effect: '',
-        id: 0,
-        url: '',
-      },
-    ],
-    url: '',
-  };
+  currentSelectedPokemon: IPokemon;
+  isModalDialogVisible: boolean = false;
 
   constructor(private modalService: ModalService) {}
 
@@ -50,11 +38,11 @@ export class PokemonsListComponent implements OnInit {
   }
 
   openModal(pokemon: IPokemon) {
+    this.isModalDialogVisible = true;
     this.currentSelectedPokemon = pokemon;
-    this.modalService.open(`modal-${pokemon.name}card`);
   }
 
-  closeModal(id: string) {
-    this.modalService.close(id);
+  closeModal(isConfirmed: boolean) {
+    this.isModalDialogVisible = isConfirmed;
   }
 }

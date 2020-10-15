@@ -23,7 +23,7 @@
     </li>
   </ul>
 
-  <app-modal id="modal-{{ currentSelectedPokemon.name }}-card">
+  <!-- <app-modal id="modal-{{ currentSelectedPokemon.name }}-card">
     <div class="dashboard-modal-item">
       <img
         src="{{ currentSelectedPokemon.image }}"
@@ -46,5 +46,8 @@
         </ul>
       </div>
     </div>
-  </app-modal>
+  </app-modal> -->
+
+  <modal-dialog *ngIf="isModalDialogVisible" (isConfirmed)="closeModal($event)" [selectedPokemon]="currentSelectedPokemon">
+  </modal-dialog>
 </section>

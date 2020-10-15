@@ -1,65 +1,29 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 import { ModalService } from '../../services/modal.service';
+import { IPokemon } from '../../types/interfaces'
 
 @Component({
-  selector: 'app-modal',
+  selector: 'modal-dialog',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ModalComponent implements OnInit, OnDestroy {
-  @Input() id: string;
-  private element: any;
+  @Input() selectedPokemon: IPokemon;
+  @Output() isConfirmed: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private modalService: ModalService, private el: ElementRef) {
-    this.element = el.nativeElement;
+  constructor() {}
+
+  ngOnInit(): void {  }
+
+  ngOnDestroy(): void{  }
+
+  confirm() {
+    this.isConfirmed.emit(true);
   }
 
-  ngOnInit(): void {
-    if (!this.id) {
-      console.error('Provide an ID to your modal!');
-      return;
-    }
-    document.body.appendChild(this.element);
-
-    this.element.addEventListener('click', el => {
-      if (el.target.className === 'app-modal') {
-        this.close();
-      }
-    })
-
-    this.modalService.add(this);
-  }
-
-  ngOnDestroy(): void{
-    this.modalService.remove(this.id);
-    this.element.remove();
-  }
-
-  add(): void{
-    if (!this.id) {
-      console.error('Provide an ID to your modal!');
-      return;
-    }
-    document.body.appendChild(this.element);
-
-    this.element.addEventListener('click', el => {
-      if (el.target.className === 'app-modal') {
-        this.close();
-      }
-    })
-
-    this.modalService.add(this);
-  }
-
-  open(): void{
-    this.element.style.display = 'flex';
-    document.body.classList.add('app-modal-open');
-  }
-
-  close(): void{
-    this.element.style.display = 'none';
-    document.body.classList.remove('app-modal-open');
+  close() {
+    this.isConfirmed.emit(false);
   }
 }

@@ -7,6 +7,8 @@ export interface IPokemon {
 }
 
 export interface IAbility {
+  id: number;
   name: string;
   url: string;
+  effect: string;
 }

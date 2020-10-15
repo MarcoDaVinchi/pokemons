@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IPokemon } from '../../../types/interfaces';
+import { ModalService } from '../../modal';
 
 @Component({
   selector: 'app-pokemons-list',
@@ -19,8 +20,11 @@ export class PokemonsListComponent implements OnInit {
   }
 
   filteredPokemons: IPokemon[] = [];
+  currentSelectedPokemon: IPokemon;
 
-  constructor() {}
+  constructor(private modalService: ModalService) {
+    this.currentSelectedPokemon = this.pokemons[0];
+  }
 
   ngOnInit(): void {}
 
@@ -32,5 +36,14 @@ export class PokemonsListComponent implements OnInit {
     } else {
       this.filteredPokemons = this.pokemons;
     }
+  }
+
+  openModal(pokemon: IPokemon) {
+    this.modalService.open(`modal-${pokemon.name}card`);
+    this.currentSelectedPokemon = pokemon;
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
   }
 }

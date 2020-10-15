@@ -1,7 +1,11 @@
 <section class="pokemons-list">
   <app-query-textbox (changed)="filter($event)"></app-query-textbox>
   <ul class="dashboard">
-    <li *ngFor="let pokemon of filteredPokemons" class="dashboard-card">
+    <li
+      *ngFor="let pokemon of filteredPokemons"
+      class="dashboard-card"
+      (click)="openModal(pokemon)"
+    >
       <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" />
       <div class="main-info">
         <h1>{{ pokemon.name }}</h1>
@@ -18,4 +22,29 @@
       </div>
     </li>
   </ul>
+
+  <app-modal id="modal-{{ currentSelectedPokemon.name }}_card">
+    <div class="dashboard-modal-item">
+      <img
+        src="{{ currentSelectedPokemon.image }}"
+        alt="{{ currentSelectedPokemon.name }}"
+      />
+      <div class="main-info">
+        <h1>{{ currentSelectedPokemon.name }}</h1>
+        <p>
+          <strong>#{{ currentSelectedPokemon.id }}</strong>
+        </p>
+        <ul>
+          <li *ngFor="let ability of currentSelectedPokemon.abilities">
+            <p>
+              {{ ability.name }}
+            </p>
+            <p>
+              {{ ability.effect }}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </app-modal>
 </section>

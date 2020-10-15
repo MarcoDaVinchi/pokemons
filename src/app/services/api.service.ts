@@ -34,8 +34,31 @@ export class ApiService {
     return null;
   }
 
+  public async getAbilityInfo(abilityUrl): Promise<IAbility> {
+    const rawAbilityData = await this.fetchUrl(abilityUrl);
+    const abilityInfo = {
+      id: rawAbilityData.id,
+      name: rawAbilityData.name,
+      url: abilityUrl,
+      effect: findLocalizedEffectEntry(rawAbilityData, 'en'),
+    };
+
+    return abilityInfo;
+
+    function findLocalizedEffectEntry(ability: any, lang: string) {
+      const localizedEffect = ability.effect_entries.find(
+        (effect_entry) => effect_entry.language.name === lang
+      ).effect;
+      if (localizedEffect) {
+        return localizedEffect;
+      } else {
+        return `No ${lang} localized effect entry`;
+      }
+    }
+  }
+
   public async getPokemonsCount() {
-    const pokemonsQuery = await this.fetchUrl(`${API_URL}/pokemon`)
+    const pokemonsQuery = await this.fetchUrl(`${API_URL}/pokemon`);
     return pokemonsQuery.count;
   }
 

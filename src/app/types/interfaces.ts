@@ -6,6 +6,18 @@ export interface IPokemon {
   url: string;
 }
 
+export interface IPokemonSummary {
+  name: string;
+  url: string;
+}
+
+export interface IPokemonSummaryList{
+  count: string;
+  next: string;
+  previous: string;
+  results: IPokemonSummary[];
+}
+
 export interface IAbility {
   id: number;
   name: string;

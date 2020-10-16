@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../../services/data.service';
-import { IPokemon } from '../../types/interfaces';
+import { IPokemon, IPokemonSummary } from '../../types/interfaces';
 
 @Component({
   selector: 'app-pokemons',
@@ -10,12 +10,25 @@ import { IPokemon } from '../../types/interfaces';
 })
 export class PokemonsComponent implements OnInit {
   pokemons: IPokemon[];
-  pokemonsSummaryList;
+  pokemonsSummaryList: IPokemonSummary[];
+  pokemonsFoundList: IPokemon[];
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.dataService.getPokemonsDash().then((data) => (this.pokemons = data));
-    this.dataService.getPokemonsSummaryList().then((data) => (this.pokemonsSummaryList = data));
+    this.dataService
+      .getPokemonsSummaryList()
+      .then((data) => (this.pokemonsSummaryList = data.results));
+  }
+
+  OnFilteredReturn(filteredPokemonsList: IPokemonSummary[]) {
+    let pokemonsFound: IPokemon[] = [];
+    for (let item of filteredPokemonsList) {
+      this.dataService
+        .getPokemonByUrl(item.url)
+        .then((data) => pokemonsFound.push(data));
+    }
+    this.pokemonsFoundList = pokemonsFound;
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from '../../environments/environment';
-import { IPokemon, IAbility } from '../types/interfaces';
+import { IPokemon, IAbility, IPokemonSummaryList } from '../types/interfaces';
 
 const API_URL: string = environment.pokeApiURL;
 const IMG_URL: string = environment.pokeApiImgURL;
@@ -24,9 +24,9 @@ export class ApiService {
     return null;
   }
 
-  public async getPokemonsSummaryList() {
+  public async getPokemonsSummaryList():Promise<IPokemonSummaryList> {
     const count = await this.getPokemonsCount();
-    const pokemons = await this.fetchUrl(
+    const pokemons:IPokemonSummaryList = await this.fetchUrl(
       `${API_URL}/pokemon?limit=${count + 1}`
     );
     return pokemons;
@@ -77,7 +77,7 @@ export class ApiService {
     return pokemonsList;
   }
 
-  private async parseRawPokemonItem(item) {
+  private async parseRawPokemonItem(item):Promise<IPokemon> {
     const details = await this.fetchUrl(item.url);
     const abilities: IAbility[] = [];
     details.abilities.map((i) => {
@@ -97,7 +97,7 @@ export class ApiService {
       abilities: abilities,
     };
 
-    return props;
+    return { ...item,...props };
   }
 
   private async fetchUrl(url) {

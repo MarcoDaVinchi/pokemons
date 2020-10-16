@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IPokemon } from '../../../types/interfaces';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IPokemon, IPokemonSummary } from '../../../types/interfaces';
 import { ModalService } from '../../modal';
 
 @Component({
@@ -19,6 +19,33 @@ export class PokemonsListComponent implements OnInit {
     }
   }
 
+  private _pokemonsSummaryList: IPokemonSummary[] = [];
+  @Input() get pokemonsSummaryList(): IPokemonSummary[] {
+    return this._pokemonsSummaryList;
+  }
+
+  set pokemonsSummaryList(value: IPokemonSummary[]) {
+    if (value) {
+      this._pokemonsSummaryList = value;
+    }
+  }
+
+  private _pokemonsFoundList: IPokemon[] = [];
+
+  @Input() get pokemonsFoundList(): IPokemon[] {
+    return this._pokemonsFoundList;
+  }
+
+  set pokemonsFoundList(value: IPokemon[]) {
+    if (value) {
+      this._pokemonsFoundList = this.filteredPokemons = value;
+    }
+  }
+
+  @Output() returnFiltered: EventEmitter<
+    IPokemonSummary[]
+  > = new EventEmitter();
+
   filteredPokemons: IPokemon[] = [];
   currentSelectedPokemon: IPokemon;
   isModalDialogVisible: boolean = false;
@@ -32,12 +59,19 @@ export class PokemonsListComponent implements OnInit {
       this.filteredPokemons = this.pokemons.filter((pokemon: IPokemon) => {
         return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
       });
+      // const filteredPokemonsList = this.pokemonsSummaryList.filter(
+      //   (pokemon: IPokemonSummary) => {
+      //     return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
+      //   }
+      // );
+      // this.returnFiltered.emit(filteredPokemonsList);
+      // // this.filteredPokemons = this.pokemonsFoundList;
     } else {
       this.filteredPokemons = this.pokemons;
     }
   }
 
-  showMorePokemons(){}
+  showMorePokemons() {}
 
   openModal(pokemon: IPokemon) {
     this.isModalDialogVisible = true;

@@ -23,7 +23,7 @@ export class PokemonsListComponent implements OnInit {
   currentSelectedPokemon: IPokemon;
   isModalDialogVisible: boolean = false;
 
-  constructor(private modalService: ModalService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
@@ -36,6 +36,8 @@ export class PokemonsListComponent implements OnInit {
       this.filteredPokemons = this.pokemons;
     }
   }
+
+  showMorePokemons(){}
 
   openModal(pokemon: IPokemon) {
     this.isModalDialogVisible = true;

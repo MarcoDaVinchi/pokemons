@@ -22,7 +22,7 @@
       </div>
     </li>
   </ul>
-
+  <input type="button" value="Show more" class="showMore__button" (click)="showMorePokemons()"/>
   <modal-dialog
     *ngIf="isModalDialogVisible"
     (isConfirmed)="closeModal($event)"

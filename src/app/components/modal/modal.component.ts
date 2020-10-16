@@ -1,13 +1,22 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 import { ModalService } from '../../services/modal.service';
-import { IPokemon } from '../../types/interfaces'
+import { IPokemon } from '../../types/interfaces';
 
 @Component({
   selector: 'modal-dialog',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input() selectedPokemon: IPokemon;
@@ -15,9 +24,9 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   constructor() {}
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void{  }
+  ngOnDestroy(): void {}
 
   confirm() {
     this.isConfirmed.emit(true);

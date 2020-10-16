@@ -27,7 +27,7 @@ import {
           borderBottom: '5px solid black',
         })
       ),
-      transition('focused<=>inacive',[animate('0.5s')]),
+      transition('focused<=>inacive',[animate('0.2s')]),
     ]),
   ],
 })

@@ -54,9 +54,13 @@
   align-items: center;
 }
 
-.dashboard-modal-item {
-  img {
-    width: 27vw;
-    // height: 60%;
+.showMore__button {
+  background-color: #74FADF;
+  margin-bottom: 3vh;
+  padding:1vh;
+  border:none;
+  border-radius: 12px;
+  &:hover{
+    background-color: #0fff3c;
   }
 }

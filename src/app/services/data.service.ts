@@ -9,17 +9,25 @@ import { ApiService } from './api.service';
 export class DataService {
   constructor(private api: ApiService) {}
 
-  public async getPokemons(): Promise<IPokemon[]> {
-    return this.api.getPokemons();
+  public async getPokemonsDash(): Promise<IPokemon[]> {
+    return this.api.getPokemonsDash();
   }
 
   public getPokemonById(pokeId: number) {}
+
+  public async getPokemonsSummaryList() {
+    return this.api.getPokemonsSummaryList();
+  }
+
+  public async getPokemonByUrl(url) {
+    return this.api.getPokemonByUrl(url);
+  };
 
   public getPokemonByName(pokeName) {
     return this.api.getPokemonByName(pokeName);
   }
 
   public getPokemonsCount() {
-    return this.api.getPokemonsCount;
+    return this.api.getPokemonsCount();
   }
 }

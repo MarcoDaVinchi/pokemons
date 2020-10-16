@@ -10,10 +10,12 @@ import { IPokemon } from '../../types/interfaces';
 })
 export class PokemonsComponent implements OnInit {
   pokemons: IPokemon[];
+  pokemonsSummaryList;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.dataService.getPokemons().then((data) => (this.pokemons = data));
+    this.dataService.getPokemonsDash().then((data) => (this.pokemons = data));
+    this.dataService.getPokemonsSummaryList().then((data) => (this.pokemonsSummaryList = data));
   }
 }

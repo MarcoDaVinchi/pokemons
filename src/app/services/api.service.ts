@@ -16,12 +16,25 @@ export class ApiService {
     let pokemonsList: IPokemon[] = [];
     const count = await this.getPokemonsCount();
     const pokemons = await this.fetchUrl(`${API_URL}/pokemon`);
+
     for (let item of pokemons.results) {
       const details = await this.fetchUrl(item.url);
+      const abilities: IAbility[] = [];
+      details.abilities.map((i) => {
+        this.getAbilityInfo(i.ability.url).then((resolvedAbility) => {
+          const ability = {
+            effect: resolvedAbility.effect,
+            id: resolvedAbility.id,
+            name: resolvedAbility.name,
+            url: resolvedAbility.url,
+          };
+          abilities.push(ability);
+        });
+      });
       const props = {
         id: details.id,
         image: `${IMG_URL}/${details.id}.png`,
-        abilities: details.abilities.map((i) => i.ability),
+        abilities: abilities,
       };
 
       pokemonsList.push({ ...item, ...props });

@@ -1,1 +1,8 @@
-<input type="text" placeholder="Pokemon query..." [(ngModel)]="filter" />
+<input
+  type="text"
+  placeholder="Pokemon query..."
+  [(ngModel)]="filter"
+  [@activeInactive]="isActive ? 'focused' : 'inacive'"
+  (focus)="toggleActivate()"
+  (blur)="toggleActivate()"
+/>

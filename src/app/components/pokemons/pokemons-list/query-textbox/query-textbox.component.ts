@@ -1,11 +1,38 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-query-textbox',
   templateUrl: './query-textbox.component.html',
   styleUrls: ['./query-textbox.component.scss'],
+  animations: [
+    trigger('activeInactive', [
+      state(
+        'focused',
+        style({
+          outline: 'none',
+          borderBottom: '7px solid #58A94A',
+        })
+      ),
+      state(
+        'inacive',
+        style({
+          outline: 'none',
+          borderBottom: '5px solid black',
+        })
+      ),
+      transition('focused<=>inacive',[animate('0.5s')]),
+    ]),
+  ],
 })
 export class QueryTextboxComponent implements OnInit {
+  isActive = false;
   private _filter: string;
   @Input() get filter() {
     return this._filter;
@@ -21,4 +48,8 @@ export class QueryTextboxComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  toggleActivate() {
+    this.isActive = !this.isActive;
+  }
 }

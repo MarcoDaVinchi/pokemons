@@ -23,31 +23,10 @@
     </li>
   </ul>
 
-  <!-- <app-modal id="modal-{{ currentSelectedPokemon.name }}-card">
-    <div class="dashboard-modal-item">
-      <img
-        src="{{ currentSelectedPokemon.image }}"
-        alt="{{ currentSelectedPokemon.name }}"
-      />
-      <div class="main-info">
-        <h1>{{ currentSelectedPokemon.name }}</h1>
-        <p>
-          <strong>#{{ currentSelectedPokemon.id }}</strong>
-        </p>
-        <ul>
-          <li *ngFor="let ability of currentSelectedPokemon.abilities">
-            <p>
-              {{ ability.name }}
-            </p>
-            <p>
-              {{ ability.effect }}
-            </p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </app-modal> -->
-
-  <modal-dialog *ngIf="isModalDialogVisible" (isConfirmed)="closeModal($event)" [selectedPokemon]="currentSelectedPokemon">
+  <modal-dialog
+    *ngIf="isModalDialogVisible"
+    (isConfirmed)="closeModal($event)"
+    [selectedPokemon]="currentSelectedPokemon"
+  >
   </modal-dialog>
 </section>

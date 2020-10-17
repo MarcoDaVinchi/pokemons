@@ -24,9 +24,9 @@ export class ApiService {
     return null;
   }
 
-  public async getPokemonsSummaryList():Promise<IPokemonSummaryList> {
+  public async getPokemonsSummaryList(): Promise<IPokemonSummaryList> {
     const count = await this.getPokemonsCount();
-    const pokemons:IPokemonSummaryList = await this.fetchUrl(
+    const pokemons: IPokemonSummaryList = await this.fetchUrl(
       `${API_URL}/pokemon?limit=${count + 1}`
     );
     return pokemons;
@@ -34,7 +34,7 @@ export class ApiService {
 
   public async getPokemonByUrl(url) {
     const pokemonRawItem = await this.fetchUrl(url);
-    const pokemon = await this.parseRawPokemonItem(pokemonRawItem);
+    const pokemon = await this.parseRawPokemonItem(pokemonRawItem, url);
     return pokemon;
   }
 
@@ -70,15 +70,15 @@ export class ApiService {
     let pokemonsList: IPokemon[] = [];
 
     for (let item of rawPokemonResults) {
-      const props = await this.parseRawPokemonItem(item);
-      pokemonsList.push({ ...item, ...props });
+      const details = await this.fetchUrl(item.url);
+      const props = await this.parseRawPokemonItem(details, item.url);
+      pokemonsList.push({ ...props });
     }
 
     return pokemonsList;
   }
 
-  private async parseRawPokemonItem(item):Promise<IPokemon> {
-    const details = await this.fetchUrl(item.url);
+  private async parseRawPokemonItem(details, pokeUrl): Promise<IPokemon> {
     const abilities: IAbility[] = [];
     details.abilities.map((i) => {
       this.getAbilityInfo(i.ability.url).then((resolvedAbility) => {
@@ -93,11 +93,13 @@ export class ApiService {
     });
     const props = {
       id: details.id,
+      name: details.name,
       image: `${IMG_URL}/${details.id}.png`,
       abilities: abilities,
+      url: pokeUrl,
     };
 
-    return { ...item,...props };
+    return { ...props };
   }
 
   private async fetchUrl(url) {

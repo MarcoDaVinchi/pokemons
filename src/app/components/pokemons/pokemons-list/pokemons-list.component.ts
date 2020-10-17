@@ -56,16 +56,16 @@ export class PokemonsListComponent implements OnInit {
 
   filter(data: string) {
     if (data) {
-      this.filteredPokemons = this.pokemons.filter((pokemon: IPokemon) => {
-        return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
-      });
-      // const filteredPokemonsList = this.pokemonsSummaryList.filter(
-      //   (pokemon: IPokemonSummary) => {
-      //     return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
-      //   }
-      // );
-      // this.returnFiltered.emit(filteredPokemonsList);
-      // // this.filteredPokemons = this.pokemonsFoundList;
+      // this.filteredPokemons = this.pokemons.filter((pokemon: IPokemon) => {
+      //   return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
+      // });
+      const filteredPokemonsList = this.pokemonsSummaryList.filter(
+        (pokemon: IPokemonSummary) => {
+          return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
+        }
+      );
+      this.returnFiltered.emit(filteredPokemonsList);
+      // this.filteredPokemons = this.pokemonsFoundList;
     } else {
       this.filteredPokemons = this.pokemons;
     }

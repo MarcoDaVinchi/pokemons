@@ -55,12 +55,17 @@
 }
 
 .showMore__button {
-  background-color: #74FADF;
+  background-color: #74fadf;
   margin-bottom: 3vh;
-  padding:1vh;
-  border:none;
+  padding: 1vh;
+  border: none;
   border-radius: 12px;
-  &:hover{
-    background-color: #0fff3c;
+  outline: none;
+  &:hover {
+    background-color: #4fd151;
+  }
+  &:active {
+    border: none;
+    background-color: #8e7c7c;
   }
 }

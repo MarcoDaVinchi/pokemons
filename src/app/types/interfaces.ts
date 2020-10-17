@@ -13,8 +13,8 @@ export interface IPokemonSummary {
 
 export interface IPokemonSummaryList{
   count: string;
-  next: string;
-  previous: string;
+  next: string|null;
+  previous: string|null;
   results: IPokemonSummary[];
 }
 

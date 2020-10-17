@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from '../../environments/environment';
-import { IPokemon, IAbility, IPokemonSummaryList } from '../types/interfaces';
+import {
+  IPokemon,
+  IAbility,
+  IPokemonSummaryList,
+  IPokemonList,
+} from '../types/interfaces';
 
 const API_URL: string = environment.pokeApiURL;
 const IMG_URL: string = environment.pokeApiImgURL;
@@ -12,10 +17,20 @@ const IMG_URL: string = environment.pokeApiImgURL;
 export class ApiService {
   constructor() {}
 
-  public async getPokemonsDash(nextPageUrl: string = ''): Promise<IPokemon[]> {
-    let url: string = nextPageUrl === '' ? `${API_URL}/pokemon` : nextPageUrl;
-    const pokemons = await this.fetchUrl(url);
-    const pokemonsList = await this.parseRawPokemonData(pokemons.results);
+  public async getPokemonsDash(
+    nextPageUrl: string = '',
+    limit: number = 20
+  ): Promise<IPokemonList> {
+    let url: string =
+      nextPageUrl === '' ? `${API_URL}/pokemon?limit=${limit}` : nextPageUrl;
+    const pokemons: IPokemonSummaryList = await this.fetchUrl(url);
+    const parsedPokemonsList = await this.parseRawPokemonData(pokemons.results);
+    let pokemonsList: IPokemonList = {
+      count: pokemons.count,
+      next: pokemons.next,
+      previous: pokemons.previous,
+      results: parsedPokemonsList,
+    };
 
     return pokemonsList;
   }
@@ -24,10 +39,13 @@ export class ApiService {
     return null;
   }
 
-  public async getPokemonsSummaryList(): Promise<IPokemonSummaryList> {
+  public async getPokemonsSummaryList(
+    amount: number = 0
+  ): Promise<IPokemonSummaryList> {
     const count = await this.getPokemonsCount();
+    const limit: string = amount === 0 ? count + 1 : amount;
     const pokemons: IPokemonSummaryList = await this.fetchUrl(
-      `${API_URL}/pokemon?limit=${count + 1}`
+      `${API_URL}/pokemon?limit=${limit}`
     );
     return pokemons;
   }

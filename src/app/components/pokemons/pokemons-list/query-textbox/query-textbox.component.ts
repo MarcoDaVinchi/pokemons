@@ -17,7 +17,7 @@ import {
         'focused',
         style({
           outline: 'none',
-          borderBottom: '7px solid #58A94A',
+          borderBottom: '5px solid #58A94A',
         })
       ),
       state(

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IPokemon, IAbility } from '../types/interfaces';
+import { IPokemon, IAbility, IPokemonList } from '../types/interfaces';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -9,19 +9,22 @@ import { ApiService } from './api.service';
 export class DataService {
   constructor(private api: ApiService) {}
 
-  public async getPokemonsDash(): Promise<IPokemon[]> {
-    return this.api.getPokemonsDash();
+  public async getPokemonsDash(
+    limit?: number,
+    nextPageUrl?: string,
+  ): Promise<IPokemonList> {
+    return this.api.getPokemonsDash(nextPageUrl, limit);
   }
 
   public getPokemonById(pokeId: number) {}
 
-  public async getPokemonsSummaryList() {
-    return this.api.getPokemonsSummaryList();
+  public async getPokemonsSummaryList(amount?: number) {
+    return this.api.getPokemonsSummaryList(amount);
   }
 
   public async getPokemonByUrl(url) {
     return this.api.getPokemonByUrl(url);
-  };
+  }
 
   public getPokemonByName(pokeName) {
     return this.api.getPokemonByName(pokeName);

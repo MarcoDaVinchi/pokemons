@@ -44,7 +44,9 @@ export class PokemonsListComponent implements OnInit {
 
   @Output() returnFiltered: EventEmitter<
     IPokemonSummary[]
-  > = new EventEmitter();
+    > = new EventEmitter();
+  
+  @Output() showMore: EventEmitter<any> = new EventEmitter();
 
   filteredPokemons: IPokemon[] = [];
   currentSelectedPokemon: IPokemon;
@@ -56,22 +58,20 @@ export class PokemonsListComponent implements OnInit {
 
   filter(data: string) {
     if (data) {
-      // this.filteredPokemons = this.pokemons.filter((pokemon: IPokemon) => {
-      //   return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
-      // });
       const filteredPokemonsList = this.pokemonsSummaryList.filter(
         (pokemon: IPokemonSummary) => {
           return pokemon.name.toLowerCase().indexOf(data.toLowerCase()) > -1;
         }
       );
       this.returnFiltered.emit(filteredPokemonsList);
-      // this.filteredPokemons = this.pokemonsFoundList;
     } else {
       this.filteredPokemons = this.pokemons;
     }
   }
 
-  showMorePokemons() {}
+  showMorePokemons() {
+    this.showMore.emit();
+  }
 
   openModal(pokemon: IPokemon) {
     this.isModalDialogVisible = true;

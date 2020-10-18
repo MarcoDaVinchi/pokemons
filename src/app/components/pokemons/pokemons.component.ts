@@ -19,13 +19,16 @@ export class PokemonsComponent implements OnInit {
   pokemonsSummaryList: IPokemonSummary[];
   pokemonsFoundList: IPokemon[];
   paginationInfo: IPokemonList;
+  isLoading:boolean = false;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.dataService.getPokemonsDash(this.pokemonsPerPage).then((data) => {
       this.pokemons = data.results;
       this.paginationInfo = data;
+      this.isLoading = false;
     });
     this.dataService
       .getPokemonsSummaryList()
@@ -46,11 +49,16 @@ export class PokemonsComponent implements OnInit {
   }
 
   OnShowMoreClick() {
+    this.isLoading = true;
     this.dataService
       .getPokemonsDash(this.pokemonsPerPage, this.paginationInfo.next)
       .then((data) => {
-        this.pokemons = this.pokemons.concat(data.results);
+        // this.pokemons = this.pokemons.concat(data.results);
+        for (const i of data.results) {
+          this.pokemons.push(i);
+        }
         this.paginationInfo = data;
+        this.isLoading = false;
       });
   }
 }

@@ -44,17 +44,18 @@ export class PokemonsListComponent implements OnInit {
 
   @Output() returnFiltered: EventEmitter<
     IPokemonSummary[]
-    > = new EventEmitter();
-  
+  > = new EventEmitter();
+
   @Output() showMore: EventEmitter<any> = new EventEmitter();
 
   filteredPokemons: IPokemon[] = [];
   currentSelectedPokemon: IPokemon;
   isModalDialogVisible: boolean = false;
+  @Input() isSpinnerEnabled:boolean = false;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   filter(data: string) {
     if (data) {

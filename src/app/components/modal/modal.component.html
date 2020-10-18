@@ -1,25 +1,20 @@
 <div class="container">
   <div class="app-modal">
-    <div class="app-modal-body">
-      <div class="dashboard-modal-item">
-        <img
-          src="{{ selectedPokemon.image }}"
-          alt="{{ selectedPokemon.name }}"
-        />
-        <div class="main-info">
-          <h1>{{ selectedPokemon.name }}</h1>
-          <strong>#{{ selectedPokemon.id }}</strong>
-          <ul>
-            <li *ngFor="let ability of selectedPokemon.abilities">
-              <strong>
-                {{ ability.name }}
-              </strong>
-              <p>
-                {{ ability.effect }}
-              </p>
-            </li>
-          </ul>
-        </div>
+    <div class="dashboard-modal-item">
+      <img src="{{ selectedPokemon.image }}" alt="{{ selectedPokemon.name }}" />
+      <div class="main-info">
+        <h1>{{ selectedPokemon.name }}</h1>
+        <strong>#{{ selectedPokemon.id }}</strong>
+        <ul>
+          <li *ngFor="let ability of selectedPokemon.abilities">
+            <strong>
+              {{ ability.name }}
+            </strong>
+            <p>
+              {{ ability.effect }}
+            </p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

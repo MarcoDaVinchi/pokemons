@@ -6,7 +6,11 @@
       class="dashboard-card"
       (click)="openModal(pokemon)"
     >
-      <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}" (error)="loadFallbackImage()"/>
+      <img
+        src="{{ pokemon.image }}"
+        alt="{{ pokemon.name }}"
+        (error)="setFallbackPic()"
+      />
       <div class="main-info">
         <h1>{{ pokemon.name }}</h1>
         <p>

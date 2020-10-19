@@ -52,6 +52,8 @@ export class PokemonsListComponent implements OnInit {
   currentSelectedPokemon: IPokemon;
   isModalDialogVisible: boolean = false;
   @Input() isSpinnerEnabled: boolean = false;
+  imageUnavailable:boolean = false;
+  error_url: string = '../../../../assets/img/error.jpg';
 
   constructor() {}
 
@@ -74,8 +76,6 @@ export class PokemonsListComponent implements OnInit {
     this.showMore.emit();
   }
 
-  loadFallbackImage(){}
-
   openModal(pokemon: IPokemon) {
     this.isModalDialogVisible = true;
     this.currentSelectedPokemon = pokemon;
@@ -83,5 +83,9 @@ export class PokemonsListComponent implements OnInit {
 
   closeModal(isConfirmed: boolean) {
     this.isModalDialogVisible = isConfirmed;
+  }
+
+  setFallbackPic() {
+    this.imageUnavailable = true;
   }
 }

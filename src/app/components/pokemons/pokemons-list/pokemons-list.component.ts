@@ -51,11 +51,11 @@ export class PokemonsListComponent implements OnInit {
   filteredPokemons: IPokemon[] = [];
   currentSelectedPokemon: IPokemon;
   isModalDialogVisible: boolean = false;
-  @Input() isSpinnerEnabled:boolean = false;
+  @Input() isSpinnerEnabled: boolean = false;
 
   constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   filter(data: string) {
     if (data) {
@@ -73,6 +73,8 @@ export class PokemonsListComponent implements OnInit {
   showMorePokemons() {
     this.showMore.emit();
   }
+
+  loadFallbackImage(){}
 
   openModal(pokemon: IPokemon) {
     this.isModalDialogVisible = true;

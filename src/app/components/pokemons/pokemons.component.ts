@@ -19,7 +19,7 @@ export class PokemonsComponent implements OnInit {
   pokemonsSummaryList: IPokemonSummary[];
   pokemonsFoundList: IPokemon[];
   paginationInfo: IPokemonList;
-  isLoading:boolean = false;
+  isLoading: boolean = false;
 
   constructor(private dataService: DataService) {}
 

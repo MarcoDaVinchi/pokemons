@@ -9,8 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { ModalService } from '../../services/modal.service';
-import { IPokemon } from '../../types/interfaces';
+import { IPokemon } from '../../../types/interfaces';
 
 @Component({
   selector: 'modal-dialog',

@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokemonsModule } from './components/pokemons/pokemons.module';
 import { CoreModule } from './core/core.module';
-import { ModalModule } from './components/modal';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +14,6 @@ import { ModalModule } from './components/modal';
     AppRoutingModule,
     PokemonsModule,
     CoreModule,
-    ModalModule,
     BrowserAnimationsModule
   ],
   providers: [],

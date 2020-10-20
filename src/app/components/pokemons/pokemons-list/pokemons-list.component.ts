@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IPokemon, IPokemonSummary } from '../../../types/interfaces';
-import { ModalService } from '../../modal';
 
 @Component({
   selector: 'app-pokemons-list',
@@ -52,8 +51,6 @@ export class PokemonsListComponent implements OnInit {
   currentSelectedPokemon: IPokemon;
   isModalDialogVisible: boolean = false;
   @Input() isSpinnerEnabled: boolean = false;
-  imageUnavailable:boolean = false;
-  error_url: string = '../../../../assets/img/error.jpg';
 
   constructor() {}
 
@@ -83,9 +80,5 @@ export class PokemonsListComponent implements OnInit {
 
   closeModal(isConfirmed: boolean) {
     this.isModalDialogVisible = isConfirmed;
-  }
-
-  setFallbackPic() {
-    this.imageUnavailable = true;
   }
 }

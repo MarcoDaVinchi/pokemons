@@ -17,7 +17,13 @@ export class PokemonsComponent implements OnInit {
   pokemonsPerPage: number = 20;
   pokemons: IPokemon[];
   pokemonsSummaryList: IPokemonSummary[];
-  pokemonsFoundList: IPokemon[];
+  private _pokemonsFoundList: IPokemon[];
+  get pokemonsFoundList() {
+    return this._pokemonsFoundList;
+  }
+  set pokemonsFoundList(value: IPokemon[]) {
+    this._pokemonsFoundList = value;
+  }
   paginationInfo: IPokemonList;
   isLoading: boolean = false;
 
@@ -39,11 +45,14 @@ export class PokemonsComponent implements OnInit {
   }
 
   OnFilteredReturn(filteredPokemonsList: IPokemonSummary[]) {
+    // this.isLoading = true;
     let pokemonsFound: IPokemon[] = [];
     for (let item of filteredPokemonsList) {
       this.dataService
         .getPokemonByUrl(item.url)
-        .then((data) => pokemonsFound.push(data));
+        .then((data) => {
+          pokemonsFound.push(data)
+        });
     }
     this.pokemonsFoundList = pokemonsFound;
   }
@@ -53,10 +62,10 @@ export class PokemonsComponent implements OnInit {
     this.dataService
       .getPokemonsDash(this.pokemonsPerPage, this.paginationInfo.next)
       .then((data) => {
-        // this.pokemons = this.pokemons.concat(data.results);
-        for (const i of data.results) {
-          this.pokemons.push(i);
-        }
+        this.pokemons = this.pokemons.concat(data.results);
+        // for (const i of data.results) {
+        //   this.pokemons.push(i);
+        // }
         this.paginationInfo = data;
         this.isLoading = false;
       });

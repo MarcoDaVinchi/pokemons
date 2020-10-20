@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="app-modal">
+    <div class="dashboard-modal-item">
+      <img
+        src="{{ selectedPokemon.image }}"
+        alt="{{ selectedPokemon.name }}"
+        appImgFallback
+      />
+      <div class="main-info">
+        <h1>{{ selectedPokemon.name }}</h1>
+        <strong>#{{ selectedPokemon.id }}</strong>
+        <ul>
+          <li *ngFor="let ability of selectedPokemon.abilities">
+            <strong>
+              {{ ability.name }}
+            </strong>
+            <p>
+              {{ ability.effect }}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-background" (click)="close()"></div>
+</div>
